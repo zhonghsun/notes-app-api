@@ -7,9 +7,10 @@ export async function main(event, context) {
   const params = {
     TableName: process.env.tableName,
     Item: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: uuid.v1(),
-      content: data.content,
+      id: uuid.v1(),
+      userid: event.requestContext.identity.cognitoIdentityId,
+      challenge: data.challenge,
+      title: data.title,
       attachment: data.attachment,
       createdAt: Date.now()
     }
@@ -19,7 +20,6 @@ export async function main(event, context) {
     await dynamoDbLib.call("put", params);
     return success(params.Item);
   } catch (e) {
-    console.log(e);
     return failure({ status: false });
   }
 }

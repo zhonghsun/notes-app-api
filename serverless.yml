@@ -1,4 +1,4 @@
-service: notes-app-api
+service: challenge-api
 
 # Create an optimized package for our functions
 package:
@@ -18,7 +18,7 @@ provider:
   # These environment variables are made available to our functions
   # under process.env.
   environment:
-    tableName: notes
+    tableName: challenges
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
@@ -45,7 +45,7 @@ functions:
     handler: create.main
     events:
       - http:
-          path: notes
+          path: challenge
           method: post
           cors: true
           authorizer: aws_iam
@@ -56,7 +56,7 @@ functions:
     handler: get.main
     events:
       - http:
-          path: notes/{id}
+          path: challenge/{id}
           method: get
           cors: true
           authorizer: aws_iam
@@ -67,7 +67,7 @@ functions:
     handler: list.main
     events:
       - http:
-          path: notes
+          path: challenge
           method: get
           cors: true
           authorizer: aws_iam
@@ -78,7 +78,7 @@ functions:
     handler: update.main
     events:
       - http:
-          path: notes/{id}
+          path: challenge/{id}
           method: put
           cors: true
           authorizer: aws_iam
@@ -89,7 +89,7 @@ functions:
     handler: delete.main
     events:
       - http:
-          path: notes/{id}
+          path: challenge/{id}
           method: delete
           cors: true
           authorizer: aws_iam
